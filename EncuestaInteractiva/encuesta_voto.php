@@ -1,69 +1,57 @@
 
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, token, Content-Type, cache-control");
+
+$_POST=json_decode(file_get_contents("php://input"),true);
+if(!isset($_POST["idRespuesta"])){
+    return;
+}
+
  //Se abre el fichero deonde están almacenados los datos
  $fichero = "resultados.txt";
  $contenido = file($fichero);
  //colocamos el contenido en un array y lo almacenamos en cuatro variables por equipos
  $array = explode("||", $contenido[0]);
- $real = $array[0];
- $bar = $array[1];
- $atl = $array[2];
- $sev = $array[3];
+ $uno = $array[0];
+ $dos = $array[1];
+ $tres = $array[2];
+ $cuatro = $array[3];
+ $cinco = $array[4];
+ $seis = $array[5];
 
  //extraemos el voto de los participantes
- $voto = $_GET['voto'];
+ $voto = $_POST['idRespuesta'];
 
  //actualizamos los votos añadiendo el recibido a los anteriores
  if ($voto == 0) {
-  $real = $real + 1;
+  $uno = $uno + 1;
  }
  if ($voto == 1) {
-  $bar = $bar + 1;
+  $dos = $dos + 1;
  }
  if ($voto == 2) {
-  $atl = $atl + 1;
+  $tres = $tres + 1;
  }
  if ($voto == 3) {
-  $sev = $sev + 1;
+  $cuatro = $cuatro + 1;
+ }
+
+ if ($voto === 4){
+  $cinco += 1;
+ }
+
+ if ($voto === 5){
+  $seis += 1;
  }
  //creamos la cadena que se va a insertar en el fichero
- $insertvoto = $real."||".$bar."||".$atl."||".$sev;
+ $insertvoto = $uno."||".$dos."||".$tres."||".$cuatro."||".$cinco."||".$seis;
  //se abre el fichero como escritura y se escriben los votos actualizados
  $fp = fopen($fichero,"w");
  fputs($fp,$insertvoto);
  fclose($fp);
 
- // se calcula el % del voto de cada uno de los equipos
- $denominador=(int)$real+(int)$bar+(int)$atl+(int)$sev;
- $tantoMadrid=100*round($real/$denominador,2);
- $tantoBarcelona=100*round($bar/$denominador,2);
- $tantoAtletico=100*round($atl/$denominador,2);
- $tantoSevilla=100*round($sev/$denominador,2);
+ echo json_encode($insertvoto);
 ?>
-<h2>Resultado:</h2>
-<table>
- <tr>
-   <td>Real Madrid:</td>
-   <td>
-   <img src="barrita.gif" width='<?php echo($tantoMadrid); ?>' height='20'> <?php echo($tantoMadrid); ?>%
-   </td>
- </tr>
- <tr>
-   <td>Barcelona:</td>
-   <td>
-   <img src="barrita.gif" width='<?php echo($tantoBarcelona); ?>' height='20'> <?php echo($tantoBarcelona); ?>%
-   </td>
- </tr>
- <tr>
-   <td>Atlético de Madrid:</td>
-   <td>
-   <img src="barrita.gif" width='<?php echo($tantoAtletico); ?>' height='20'> <?php echo($tantoAtletico); ?>%
-   </td>
- </tr>
- <tr>
-   <td>Sevilla:</td>
-   <td>
-   <img src="barrita.gif" width='<?php echo($tantoSevilla); ?>' height='20'> <?php echo($tantoSevilla); ?>%
-   </td>
- </tr>
-</table>

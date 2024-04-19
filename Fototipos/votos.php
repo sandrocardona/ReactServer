@@ -51,7 +51,7 @@ if ($fototipo == 5) {
 }
 
 //creamos la cadena que se va a insertar en el fichero
-$insertvoto = $uno . "||" . $dos . "||" . $tres . "||" . $cuatro . "||" . $cinco . "||" . $seis;
+$insertvoto = $uno."||".$dos."||".$tres."||".$cuatro."||".$cinco."||".$seis;
 
 //se abre el fichero como escritura y se escriben los votos actualizados
 $fp = fopen($fichero, "w");
