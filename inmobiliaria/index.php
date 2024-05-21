@@ -4,7 +4,7 @@
     define("SERVIDOR_BD","localhost");
     define("USUARIO_BD","jose");
     define("CLAVE_BD","josefa");
-    define("NOMBRE_BD","TEST_n0_REACT");
+    define("NOMBRE_BD","bd_inmobiliaria");
 
     //GET DATA
     try{
