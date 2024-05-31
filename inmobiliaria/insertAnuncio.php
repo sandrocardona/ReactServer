@@ -22,7 +22,25 @@ try {
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (isset($data['nombre'])) {
+if (
+    isset($data['idTipo']) &&
+    isset($data['idViviendas']) &&
+    isset($data['idVenta']) &&
+    isset($data['localidad']) &&
+    isset($data['estado']) &&
+    isset($data['titulo']) &&
+    isset($data['informacion']) &&
+    isset($data['metros']) &&
+    isset($data['precio']) &&
+    isset($data['habitaciones']) &&
+    isset($data['bannos']) &&
+    isset($data['piscina']) &&
+    isset($data['garaje']) &&
+    isset($data['trastero']) &&
+    isset($data['foto']) &&
+    isset($data['telefono']) &&
+    isset($data['nombre'])
+) {
     $id_tipo = $data['idTipo'];
     $id_viviendas = $data['idViviendas'];
     $id_venta = $data['idVenta'];
@@ -30,13 +48,13 @@ if (isset($data['nombre'])) {
     $estado = $data['estado'];
     $titulo = $data['titulo'];
     $informacion = $data['informacion'];
-    $metros = $data['metros'];
-    $precio = $data['precio'];
+    $metros = (float)$data['metros'];
+    $precio = (float)$data['precio'];
     $habitaciones = $data['habitaciones'];
-    $baños = $data['baños'];
+    $bannos = $data['bannos'];
     $piscina = $data['piscina'];
     $garaje = $data['garaje'];
-    $trastero = $data['trastero'];
+    $trastero = (float)$data['trastero'];
     $foto = $data['foto'];
     $telefono = $data['telefono'];
     $nombre = $data['nombre'];
@@ -54,7 +72,7 @@ if (isset($data['nombre'])) {
                 metros,
                 precio,
                 habitaciones,
-                baños,
+                bannos,
                 piscina,
                 garaje,
                 trastero,
@@ -73,7 +91,7 @@ if (isset($data['nombre'])) {
                 :metros, 
                 :precio, 
                 :habitaciones, 
-                :baños, 
+                :bannos, 
                 :piscina, 
                 :garaje, 
                 :trastero, 
@@ -92,7 +110,7 @@ if (isset($data['nombre'])) {
         $stmt->bindParam(':metros', $metros);
         $stmt->bindParam(':precio', $precio);
         $stmt->bindParam(':habitaciones', $habitaciones);
-        $stmt->bindParam(':baños', $baños);
+        $stmt->bindParam(':bannos', $bannos);
         $stmt->bindParam(':piscina', $piscina);
         $stmt->bindParam(':garaje', $garaje);
         $stmt->bindParam(':trastero', $trastero);
