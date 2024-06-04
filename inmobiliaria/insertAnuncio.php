@@ -4,10 +4,15 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, token, Content-Type, cache-control");
 header('Content-Type: application/json');
 
-define("SERVIDOR_BD","localhost");
+define("SERVIDOR_BD","lldn295.servidoresdns.net");
+define("USUARIO_BD","qaiw208");
+define("CLAVE_BD","1PesetaSpain");
+define("NOMBRE_BD","qahz656");
+
+/* define("SERVIDOR_BD","localhost");
 define("USUARIO_BD","jose");
 define("CLAVE_BD","josefa");
-define("NOMBRE_BD","bd_inmobiliaria");
+define("NOMBRE_BD","bd_inmobiliaria"); */
 
 $respuesta = array();
 
@@ -61,7 +66,7 @@ if (
 
 
     try {
-        $consulta = "INSERT INTO propiedades (
+        $consulta = "INSERT INTO SANDRO_propiedades (
                 id_tipo,
                 id_viviendas,
                 id_venta,
